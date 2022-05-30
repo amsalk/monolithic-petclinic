@@ -17,7 +17,7 @@ The following items should be installed in your system:
 
 1) **Clone the repository**
     ```
-    git clone https://github.com/gregorriegler/monolithic-petclinic.git
+    git clone https://<username>:<personal-access-token>@github.com/amsalk/monolithic-petclinic.git
     ```
 2) **Import into Eclipse or STS**
     ```
