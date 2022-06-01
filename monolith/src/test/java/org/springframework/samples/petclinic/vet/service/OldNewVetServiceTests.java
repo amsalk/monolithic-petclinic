@@ -38,12 +38,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Dave Syer
  */
 @SpringBootTest
-class VetServiceTests {
+class OldNewVetServiceTests {
 
     private final WireMockServer wireMock = new WireMockServer(options().port(8081));
 
     @Autowired
-    VetService service;
+    OldVetService service;
 
     @BeforeEach
     void startWireMock() {
