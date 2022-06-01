@@ -13,25 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.controller;
+package org.springframework.samples.petclinic.vet.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.samples.petclinic.model.Owner;
+import javax.persistence.*;
+import java.io.Serializable;
 
-import java.time.LocalDate;
+/**
+ * Models a {@link Vet Vet's} specialty (for example, dentistry).
+ *
+ * @author Juergen Hoeller
+ */
+@Entity
+@Table(name = "specialties")
+public class Specialty implements Serializable {
 
-public class PetForm {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "name")
     private String name;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate birthDate;
-
-    private String type;
-
-    private Owner owner;
 
     public Integer getId() {
         return id;
@@ -42,38 +43,16 @@ public class PetForm {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    @Override
+    public String toString() {
+        return "id=" + id + ", name=" + name;
     }
 
-    public LocalDate getBirthDate() {
-        return this.birthDate;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Owner getOwner() {
-        return this.owner;
-    }
-
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
-    public boolean isNew() {
-        return id == null;
-    }
 }
