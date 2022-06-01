@@ -18,14 +18,12 @@ public class VetService {
 
     public Collection<VetDTO> findAll() {
         return vetRepository.findAll().stream()
-                .map(vet -> {
-                    return new VetDTO(vet.getFirstName(),
-                            vet.getLastName(),
-                            vet.getSpecialties().stream()
-                                    .map(s -> new SpecialtyDTO(s.getName()))
-                                    .collect(Collectors.toList()),
-                            vet.getNrOfSpecialties());
-                })
+                .map(vet -> new VetDTO(vet.getFirstName(),
+                        vet.getLastName(),
+                        vet.getSpecialties().stream()
+                                .map(s -> new SpecialtyDTO(s.getName()))
+                                .collect(Collectors.toList()),
+                        vet.getNrOfSpecialties()))
                 .collect(Collectors.toList());
     }
 }
