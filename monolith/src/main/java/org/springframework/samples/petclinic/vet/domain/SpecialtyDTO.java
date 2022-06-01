@@ -2,7 +2,10 @@ package org.springframework.samples.petclinic.vet.domain;
 
 public class SpecialtyDTO {
 
-    private final String name;
+    private String name;
+
+    public SpecialtyDTO() {
+    }
 
     public SpecialtyDTO(String name) {
         this.name = name;
@@ -10,5 +13,9 @@ public class SpecialtyDTO {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

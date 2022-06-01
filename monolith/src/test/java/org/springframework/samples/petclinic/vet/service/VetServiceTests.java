@@ -15,14 +15,18 @@
  */
 package org.springframework.samples.petclinic.vet.service;
 
+import com.github.tomakehurst.wiremock.WireMockServer;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.samples.petclinic.vet.domain.VetDTO;
-import org.springframework.samples.petclinic.vet.model.Vet;
 
 import java.util.Collection;
 
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -36,11 +40,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class VetServiceTests {
 
+    private final WireMockServer wireMock = new WireMockServer(options().port(8081));
+
     @Autowired
     VetService service;
 
+    @BeforeEach
+    void startWireMock() {
+        wireMock.start();
+    }
+
+    @AfterEach
+    void stopWireMock() {
+        wireMock.stop();
+    }
+
     @Test
     void shouldFindAllVetsDTO() {
+        wireMock.stubFor(get(urlEqualTo("/vets"))
+                .willReturn(aResponse()
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("[{\"firstName\":\"Linda\",\"lastName\":\"Douglas\",\"specialties\":[{\"name\":\"dentistry\"},{\"name\":\"surgery\"}],\"nrOfSpecialties\":2}]")));
+
         Collection<VetDTO> vets = service.findAll();
 
         assertThat(vets)
