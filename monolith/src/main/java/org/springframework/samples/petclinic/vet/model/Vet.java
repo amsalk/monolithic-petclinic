@@ -38,18 +38,18 @@ import org.springframework.beans.support.PropertyComparator;
 @Table(name = "vets")
 public class Vet implements Serializable {
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "vet_specialties", joinColumns = @JoinColumn(name = "vet_id"), inverseJoinColumns = @JoinColumn(name = "specialty_id"))
-    private Set<Specialty> specialties;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(name = "first_name")
     @NotEmpty
     private String firstName;
     @Column(name = "last_name")
     @NotEmpty
     private String lastName;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "vet_specialties", joinColumns = @JoinColumn(name = "vet_id"), inverseJoinColumns = @JoinColumn(name = "specialty_id"))
+    private Set<Specialty> specialties;
 
     protected Set<Specialty> getSpecialtiesInternal() {
         if (this.specialties == null) {
@@ -98,9 +98,5 @@ public class Vet implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public boolean isNew() {
-        return this.id == null;
     }
 }

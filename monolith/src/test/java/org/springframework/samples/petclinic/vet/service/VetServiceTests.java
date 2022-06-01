@@ -18,6 +18,7 @@ package org.springframework.samples.petclinic.vet.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.samples.petclinic.vet.domain.VetDTO;
 import org.springframework.samples.petclinic.vet.model.Vet;
 
 import java.util.Collection;
@@ -39,17 +40,17 @@ class VetServiceTests {
     VetService service;
 
     @Test
-    void shouldFindVets() {
-        Collection<Vet> vets = service.allVets();
+    void shouldFindAllVetsDTO() {
+        Collection<VetDTO> vets = service.findAll();
 
         assertThat(vets)
-            .filteredOn(vet -> vet.getId() == 3)
-            .hasSize(1)
-            .first()
-            .hasFieldOrPropertyWithValue("lastName", "Douglas")
-            .hasFieldOrPropertyWithValue("nrOfSpecialties", 2)
-            .extracting(Vet::getSpecialties).asList()
-            .extracting("name")
-            .containsExactly("dentistry", "surgery");
+                .filteredOn(vet -> vet.getFirstName().equals("Linda"))
+                .hasSize(1)
+                .first()
+                .hasFieldOrPropertyWithValue("lastName", "Douglas")
+                .hasFieldOrPropertyWithValue("nrOfSpecialties", 2)
+                .extracting(VetDTO::getSpecialties).asList()
+                .extracting("name")
+                .containsExactly("dentistry", "surgery");
     }
 }
