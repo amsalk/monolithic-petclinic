@@ -57,7 +57,7 @@ class OldNewVetServiceTests {
 
     @Test
     void shouldFindAllVetsDTO() {
-        wireMock.stubFor(get(urlEqualTo("/vets"))
+        wireMock.stubFor(get(urlEqualTo("/vetsnew"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withBody("[{\"firstName\":\"Linda\",\"lastName\":\"Douglas\",\"specialties\":[{\"name\":\"dentistry\"},{\"name\":\"surgery\"}],\"nrOfSpecialties\":2}]")));

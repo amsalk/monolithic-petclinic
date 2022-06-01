@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.vet.service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.samples.petclinic.vet.controller.VetService;
 import org.springframework.samples.petclinic.vet.db.VetRepository;
 import org.springframework.samples.petclinic.vet.domain.SpecialtyDTO;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
+@Qualifier("oldVerService")
 public class OldVetService implements VetService {
 
         private final VetRepository vetRepository;

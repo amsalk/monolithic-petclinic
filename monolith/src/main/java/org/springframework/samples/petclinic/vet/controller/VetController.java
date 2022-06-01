@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.vet.controller;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.samples.petclinic.vet.service.OldVetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,15 +31,15 @@ import java.util.Map;
 @Controller
 class VetController {
 
-    private final OldVetService oldVetService;
+    private final VetService vetService;
 
-    public VetController(OldVetService oldVetService) {
-        this.oldVetService = oldVetService;
+    public VetController(@Qualifier("newVetService") VetService vetService) {
+        this.vetService = vetService;
     }
 
     @GetMapping("/vets")
     public String showVetList(Map<String, Object> model) {
-        model.put("vets", this.oldVetService.findAll());
+        model.put("vets", this.vetService.findAll());
         return "vets/vetList";
     }
 
