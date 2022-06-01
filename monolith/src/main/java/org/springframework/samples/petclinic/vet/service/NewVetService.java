@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @Service
-@Qualifier("newVerService")
+@Qualifier("newVetService")
 public class NewVetService implements VetService {
 
     private RestTemplate restTemplate;

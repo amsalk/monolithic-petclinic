@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-@Qualifier("oldVerService")
+@Qualifier("oldVetService")
 public class OldVetService implements VetService {
 
         private final VetRepository vetRepository;
@@ -27,8 +27,7 @@ public class OldVetService implements VetService {
                             vet.getLastName(),
                             vet.getSpecialties().stream()
                                     .map(s -> new SpecialtyDTO(s.getName()))
-                                    .collect(Collectors.toList()),
-                            vet.getNrOfSpecialties()))
+                                    .collect(Collectors.toList())))
                     .collect(Collectors.toList());
         }
     }
