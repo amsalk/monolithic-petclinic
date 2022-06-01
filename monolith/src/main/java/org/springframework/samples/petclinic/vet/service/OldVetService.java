@@ -14,20 +14,20 @@ import java.util.stream.Collectors;
 @Qualifier("oldVetService")
 public class OldVetService implements VetService {
 
-        private final VetRepository vetRepository;
+    private final VetRepository vetRepository;
 
-        public OldVetService(VetRepository vetRepository) {
-            this.vetRepository = vetRepository;
-        }
-
-        @Override
-        public Collection<VetDTO> findAll() {
-            return vetRepository.findAll().stream()
-                    .map(vet -> new VetDTO(vet.getFirstName(),
-                            vet.getLastName(),
-                            vet.getSpecialties().stream()
-                                    .map(s -> new SpecialtyDTO(s.getName()))
-                                    .collect(Collectors.toList())))
-                    .collect(Collectors.toList());
-        }
+    public OldVetService(VetRepository vetRepository) {
+        this.vetRepository = vetRepository;
     }
+
+    @Override
+    public Collection<VetDTO> findAll() {
+        return vetRepository.findAll().stream()
+                .map(vet -> new VetDTO(vet.getFirstName(),
+                        vet.getLastName(),
+                        vet.getSpecialties().stream()
+                                .map(s -> new SpecialtyDTO(s.getName()))
+                                .collect(Collectors.toList())))
+                .collect(Collectors.toList());
+    }
+}

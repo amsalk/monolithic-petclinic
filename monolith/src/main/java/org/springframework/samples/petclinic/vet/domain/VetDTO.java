@@ -12,11 +12,11 @@ public class VetDTO {
     public VetDTO() {
     }
 
-    public VetDTO(String firstName, String lastName, List<SpecialtyDTO> specialties, int nrOfSpecialties) {
+    public VetDTO(String firstName, String lastName, List<SpecialtyDTO> specialties) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.specialties = specialties;
-        this.nrOfSpecialties = nrOfSpecialties;
+        this.nrOfSpecialties = specialties.size();
     }
 
     public String getFirstName() {
